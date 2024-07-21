@@ -2,11 +2,16 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  # Load port mappings from external file
+  require_relative 'port_mappings'
+
   # Use the Debian 12 (Bookworm) image
   config.vm.box = "generic/debian12"
 
-  # Forward a port from the guest VM to the host machine (optional)
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  # Loop through the port mappings and set up port forwarding
+  PORT_MAPPINGS.each do |guest, host|
+    config.vm.network "forwarded_port", guest: guest, host: host
+  end
 
   # Configure a private network with a specific IP
   config.vm.network "private_network", ip: "192.168.60.60"
