@@ -18,3 +18,15 @@ apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 
 # https://docs.docker.com/engine/install/linux-postinstall/
 usermod -aG docker vagrant
+
+# Configure Docker to listen on a TCP port
+mkdir -p /etc/systemd/system/docker.service.d
+cat <<EOF > /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+EOF
+
+# Reload systemd and restart Docker
+systemctl daemon-reload
+systemctl restart docker

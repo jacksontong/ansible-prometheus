@@ -8,6 +8,9 @@ Vagrant.configure("2") do |config|
   # Forward a port from the guest VM to the host machine (optional)
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
+  # Configure a private network with a specific IP
+  config.vm.network "private_network", ip: "192.168.60.60"
+
   # Customize the amount of memory on the VM (optional)
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
