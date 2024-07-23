@@ -1,4 +1,0 @@
-# Define a dictionary of synced folders (host to guest)
-SYNCED_FOLDERS = {
-  
-}

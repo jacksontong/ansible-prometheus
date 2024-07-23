@@ -5,3 +5,4 @@
 # *.log
 port_mappings.rb
 synced_folders.rb
+ssh
