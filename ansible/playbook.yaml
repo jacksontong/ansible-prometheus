@@ -1,5 +1,5 @@
 ---
-- name: Install Git on myhosts
+- name: Install Git, Nginx, and PHP 8.3 on myhosts
   hosts: myhosts
   become: true
 
@@ -11,4 +11,46 @@
     - name: Install Git
       ansible.builtin.apt:
         name: git
+        state: present
+
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Install prerequisites for adding repository
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - lsb-release
+          - ca-certificates
+        state: present
+
+    - name: Add Sury PHP repository GPG key
+      ansible.builtin.apt_key:
+        url: https://packages.sury.org/php/apt.gpg
+        state: present
+
+    - name: Add Sury PHP repository
+      ansible.builtin.apt_repository:
+        repo: deb https://packages.sury.org/php/ bookworm main
+        state: present
+        update_cache: true
+
+    - name: Install PHP 8.3 and related packages
+      ansible.builtin.apt:
+        name:
+          - php8.3
+          - php8.3-cli
+          - php8.3-common
+          - php8.3-mysql
+          - php8.3-intl
+          - php8.3-fpm
+          - php8.3-redis
+          - php8.3-gd
+          - php8.3-mbstring
+          - php8.3-dom
+          - php8.3-bcmath
+          - php8.3-curl
+          - php8.3-zip
         state: present
