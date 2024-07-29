@@ -1,0 +1,10 @@
+---
+- name: Ping ungroupep hosts
+  hosts: myhosts
+  tasks:
+    - name: Ping myhosts hosts
+      ansible.builtin.ping:
+
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello world
