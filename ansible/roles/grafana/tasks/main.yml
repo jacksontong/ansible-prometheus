@@ -1,0 +1,44 @@
+---
+- name: Update APT package list
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install dependencies
+  ansible.builtin.package:
+    name:
+      - apt-transport-https
+      - software-properties-common
+      - wget
+    state: present
+
+- name: Add Grafana APT key
+  ansible.builtin.apt_key:
+    url: "{{ grafana_apt_key_url }}"
+    state: present
+
+- name: Add Grafana APT repository
+  ansible.builtin.apt_repository:
+    repo: "{{ grafana_apt_repo }}"
+    state: present
+    update_cache: true
+
+- name: Install Grafana
+  ansible.builtin.package:
+    name: grafana
+    state: present
+
+- name: Ensure Grafana service is started and enabled
+  ansible.builtin.service:
+    name: "{{ grafana_service_name }}"
+    state: started
+    enabled: true
+
+- name: Configure Grafana
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Grafana

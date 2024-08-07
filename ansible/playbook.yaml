@@ -4,3 +4,9 @@
   become: true
   roles:
     - role: prometheus
+
+- name: Install Grafana on Debian Servers
+  hosts: myhosts
+  become: true
+  roles:
+    - role: grafana
