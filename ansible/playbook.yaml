@@ -1,12 +1,12 @@
 ---
 - name: Install Prometheus on Servers
-  hosts: myhosts
+  hosts: prometheus
   become: true
   roles:
     - role: prometheus
 
 - name: Install Grafana on Debian Servers
-  hosts: myhosts
+  hosts: prometheus
   become: true
   roles:
     - role: grafana

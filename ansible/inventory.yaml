@@ -1,7 +1,16 @@
-myhosts:
+all:
   hosts:
-    vagrant:
+    prometheus:
       ansible_host: 192.168.60.60
-      ansible_ssh_private_key_file: /mnt/Code/Jackson/docker-vm/ssh/vagrant
       ansible_user: vagrant
-      ansible_password: vagrant
+      ansible_ssh_pass: vagrant
+      ansible_ssh_private_key_file: ./ssh/vagrant_ed25519
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+    webserver:
+      ansible_host: 192.168.60.61
+      ansible_user: vagrant
+      ansible_ssh_pass: vagrant
+      ansible_ssh_private_key_file: ./ssh/vagrant_ed25519
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+  vars:
+    ansible_python_interpreter: /usr/bin/python3

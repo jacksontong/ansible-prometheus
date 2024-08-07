@@ -1,8 +1,10 @@
 ---
-- name: Ping ungroupep hosts
-  hosts: myhosts
+- name: Ping vagrant hosts
+  hosts:
+    - prometheus-server
+    - webserver
   tasks:
-    - name: Ping myhosts hosts
+    - name: Ping vagrant hosts
       ansible.builtin.ping:
 
     - name: Print message
