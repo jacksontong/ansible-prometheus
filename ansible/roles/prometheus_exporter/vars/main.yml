@@ -1,0 +1,6 @@
+---
+prometheus_exporter_node_exporter_version: "1.5.0"
+prometheus_exporter_node_exporter_download_url:
+  "https://github.com/prometheus/node_exporter/releases/download/v\
+  {{ prometheus_exporter_node_exporter_version }}/node_exporter-{{ prometheus_exporter_node_exporter_version }}.linux-amd64.tar.gz"
+prometheus_exporter_exporter_user: "prometheus"

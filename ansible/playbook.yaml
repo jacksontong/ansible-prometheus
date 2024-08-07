@@ -10,3 +10,9 @@
   become: true
   roles:
     - role: grafana
+
+- name: Install Prometheus Node Exporter on Servers
+  hosts: all
+  become: true
+  roles:
+    - role: prometheus_exporter
